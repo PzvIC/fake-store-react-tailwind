@@ -1,7 +1,7 @@
-// useCategories.js
 import { useEffect, useState } from "react";
 
-function useCategories(endpoint = "https://api.escuelajs.co/api/v1/categories"
+function useCategories(
+  endpoint = "https://fakestoreapi.com/products/categories"
 ) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +9,10 @@ function useCategories(endpoint = "https://api.escuelajs.co/api/v1/categories"
 
   useEffect(() => {
     fetch(endpoint)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Error al obtener categorías");
+        return res.json();
+      })
       .then((json) => {
         setData(json);
         setLoading(false);

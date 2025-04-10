@@ -1,32 +1,12 @@
+.masonry-wrapper {
+  @apply max-w-[80%] mx-auto mt-4;
+}
 
-
-/* Contenedor del grid */
 .masonry-grid {
-  @apply mt-10 columns-1 sm:columns-2 lg:columns-3 gap-4 max-w-[80%] mx-auto;
+  @apply flex ml-[-1rem] w-auto;
 }
 
-/* Cada tarjeta del masonry */
-.masonry-item {
-  @apply mb-4 break-inside-avoid rounded border-2 p-4 border-amber-300 bg-slate-800 shadow;
+.masonry-column {
+  @apply pl-4;
+  background-clip: padding-box;
 }
-
-/* Imagen del producto con fade-in */
-.product-image {
-  @apply w-full object-cover mb-2 rounded opacity-0 scale-95 transition-all duration-700 ease-in-out;
-  @apply max-h-[400px];
-}
-
-/* Cuando está visible, aplicamos la transformación final */
-.product-image.show {
-  @apply opacity-100 scale-100;
-}
-
-/* Título y precio */
-.product-title {
-  @apply text-lg font-semibold;
-}
-
-.product-price {
-  @apply text-gray-600;
-}
-

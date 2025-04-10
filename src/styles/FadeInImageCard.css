@@ -1,0 +1,16 @@
+.masonry-item {
+  @apply mb-4 rounded border-2 border-amber-300 bg-white shadow p-4 hover:cursor-pointer;
+  will-change: transform;
+}
+
+.product-image {
+  @apply w-full h-auto object-cover mb-2 rounded opacity-0 scale-95 transition-all duration-700 ease-in-out;
+}
+
+.product-image.show {
+  @apply opacity-100 scale-100;
+}
+
+.placeholder{
+    @apply aspect-[3/4] w-full bg-white animate-pulse rounded mb-2
+}

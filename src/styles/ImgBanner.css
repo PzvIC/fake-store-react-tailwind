@@ -1,5 +1,5 @@
 .banner-container {
-    @apply relative w-full h-[800px] bg-cover bg-top mx-auto flex items-center justify-center border-b-2 border-amber-300 mt-24;
+    @apply relative w-full h-[900px] bg-cover bg-top mx-auto flex items-center justify-center border-b-2 border-amber-300 mt-24;
     background-image: url("../assets/ex.jpg");
   }
   

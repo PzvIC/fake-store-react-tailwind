@@ -1,41 +1,31 @@
 import { useEffect, useState } from "react";
 
-function useProducts(categoryId = null) {
+function useProducts(category = null) {
   const [data, setData] = useState([]);
-  const [filtered, setFiltered] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://api.escuelajs.co/api/v1/products")
+    // Define la URL según si se quiere filtrar por categoría
+    const url = category
+      ? `https://fakestoreapi.com/products/category/${encodeURIComponent(category)}`
+      : "https://fakestoreapi.com/products";
+
+    fetch(url)
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Error al obtener productos");
-        }
+        if (!res.ok) throw new Error("Error al obtener productos");
         return res.json();
       })
       .then((json) => {
-        // 🔍 Filtrar productos sin imágenes válidas
+        // Algunos productos podrían tener imágenes vacías o inválidas
         const productsWithImages = json.filter(
           (product) =>
-            Array.isArray(product.images) &&
-            product.images.length > 0 &&
-            product.images[0] &&
-            product.images[0].trim() !== ""
+            product.image &&
+            typeof product.image === "string" &&
+            product.image.trim() !== ""
         );
 
         setData(productsWithImages);
-
-        // Aplicar filtrado por categoría si se usa
-        if (categoryId) {
-          const filteredByCategory = productsWithImages.filter(
-            (product) => product.category?.id === categoryId
-          );
-          setFiltered(filteredByCategory);
-        } else {
-          setFiltered(productsWithImages);
-        }
-
         setLoading(false);
       })
       .catch((err) => {
@@ -43,9 +33,9 @@ function useProducts(categoryId = null) {
         setError(err);
         setLoading(false);
       });
-  }, [categoryId]);
+  }, [category]);
 
-  return { data: filtered, loading, error };
+  return { data, loading, error };
 }
 
 export { useProducts };
