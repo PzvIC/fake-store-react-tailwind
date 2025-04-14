@@ -1,9 +1,9 @@
 .header-container {
-  @apply fixed top-0 left-0 w-full z-50 shadow p-4 justify-between bg-slate-800 flex;
+  @apply fixed top-0 left-0 w-full z-50 shadow p-4 justify-between bg-gray-800/85 flex;
 }
 
 .header-title {
-  @apply text-white text-3xl font-bold py-3;
+  @apply text-gray-100 text-3xl font-bold py-3;
 }
 
 
@@ -12,8 +12,8 @@
 }
 
 .search-input {
-  @apply w-full px-4 py-2 my-2 bg-slate-600 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-amber-300 text-white
-  placeholder:text-slate-400;
+  @apply w-full px-4 py-2 my-2 bg-gray-950 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-amber-300 text-gray-100
+  placeholder:text-gray-100;
 }
 
 .cart-button {
@@ -21,9 +21,9 @@
 }
 
 .cart-icon {
-  @apply h-12 w-12 text-amber-300;
+  @apply h-10 w-10 text-amber-300;
 }
 
 .cart-badge {
-  @apply absolute -top-1 -right-1 bg-red-500 text-white text-lg px-2 rounded-full;
+  @apply absolute -top-0 -right-1 bg-red-500 text-white text-base px-2 rounded-full;
 }

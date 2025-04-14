@@ -1,16 +1,23 @@
-.masonry-item {
-  @apply mb-4 rounded border-2 border-amber-300 bg-white shadow p-4 hover:cursor-pointer;
-  will-change: transform;
-}
+@tailwind utilities;
 
 .product-image {
-  @apply w-full h-auto object-cover mb-2 rounded opacity-0 scale-95 transition-all duration-700 ease-in-out;
+  @apply w-full h-auto max-h-[480px] max-w-[400px] rounded opacity-0 scale-95 fade-in;
 }
 
 .product-image.show {
   @apply opacity-100 scale-100;
 }
 
-.placeholder{
-    @apply aspect-[3/4] w-full bg-white animate-pulse rounded mb-2
+.image-placeholder {
+  @apply w-full max-h-[400px] aspect-square bg-gray-300 animate-pulse rounded;
+}
+
+@layer utilities {
+  .fade-in {
+    @apply opacity-0 scale-90 transition-all duration-1000 ease-out;
+  }
+
+  .fade-in.show {
+    @apply opacity-100 scale-100;
+  }
 }

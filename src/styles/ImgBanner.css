@@ -1,5 +1,18 @@
 .banner-container {
-    @apply relative w-full h-[900px] bg-cover bg-top mx-auto flex items-center justify-center border-b-2 border-amber-300 mt-24;
-    background-image: url("../assets/ex.jpg");
-  }
-  
+  @apply relative bg-cover bg-center w-full h-[1000px] mx-auto flex items-start justify-start px-10 pt-32 rounded-b-[100px];
+  background-image: url("../assets/ax.jpg");
+}
+
+.banner-title {
+  @apply text-amber-300 mt-24 font-cormorant text-5xl sm:text-6xl lg:text-9xl leading-tight max-w-[600px] pl-10;
+  text-shadow: 3px 3px 0 #000, 6px 6px 0 #444;
+}
+
+.banner-title {
+  @apply transition-transform duration-300 ease-in-out;
+}
+
+.banner-title:hover {
+  transform: translateY(-4px);
+  cursor: default;
+}

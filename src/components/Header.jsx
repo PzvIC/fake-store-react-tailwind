@@ -5,12 +5,12 @@ import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 function Header() {
     return (
         <header className="header-container">
-            <h1 className="header-title">FakeStore_</h1>
+            <h1 className="header-title">Fake_Store_</h1>
 
             <div className="header-search">
                 <input
                     type="text"
-                    placeholder="Find products..."
+                    placeholder="What are you looking for?"
                     className="search-input"
                 />
             </div>
@@ -19,6 +19,7 @@ function Header() {
                 <ShoppingCartIcon className="cart-icon" />
                 <span className="cart-badge">3</span>
             </button>
+            
         </header>
     );
 }

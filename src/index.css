@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 html{
-    @apply bg-gray-950/85
+    @apply bg-slate-800
 }

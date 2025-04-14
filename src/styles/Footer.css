@@ -1,5 +1,5 @@
 .footer-container {
-  @apply bg-slate-800 text-amber-200 p-14 shadow-md border-2 rounded-lg border-amber-200 m-1 shadow-md;
+  @apply bg-gray-700 text-gray-100 mt-20 p-14 shadow-md rounded-lg rounded-t-[100px];
 }
 
 .footer-title {
