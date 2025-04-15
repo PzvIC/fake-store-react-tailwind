@@ -6,7 +6,7 @@ function NavBar() {
     data: categories,
     loading,
     error,
-  } = useCategories(); // sin necesidad de pasar endpoint
+  } = useCategories();
 
   const renderWithSeparators = () => {
     if (!Array.isArray(categories)) return [];
@@ -15,7 +15,7 @@ function NavBar() {
     categories.forEach((category, index) => {
       items.push(
         <li key={category} className="navbar-item">
-          <a href={`#${category}`} className="navbar-link capitalize">
+          <a href={`#${category}`} className="navbar-link">
             {category}
           </a>
         </li>

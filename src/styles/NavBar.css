@@ -11,7 +11,7 @@
 }
 
 .navbar-link {
-  @apply block w-full px-4 py-2 text-sm font-medium text-gray-100 hover:bg-gray-800 hover:text-gray-100 transition duration-200 rounded;
+  @apply block w-full px-4 py-2 text-sm font-medium text-gray-100 hover:bg-gray-800 hover:text-white transition duration-200 rounded capitalize;
 }
 
 .navbar-separator {

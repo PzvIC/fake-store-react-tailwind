@@ -1,7 +1,16 @@
 .footer-container {
-  @apply bg-gray-700 text-gray-100 mt-20 p-14 shadow-md rounded-lg rounded-t-[100px];
+  @apply bg-gray-950 text-gray-100 mt-20 p-14 shadow-md rounded-lg rounded-t-[100px];
 }
 
-.footer-title {
-  @apply flex justify-end text-5xl font-bold tracking-wide;
+.footer-links {
+  @apply flex items-center justify-center text-lg font-medium;
+}
+
+.footer-links li a {
+  @apply px-48 py-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-800 transition-colors;
+}
+
+/* Separador separado, no afectado por hover */
+.footer-separator {
+  @apply text-amber-300 text-xl select-none;
 }

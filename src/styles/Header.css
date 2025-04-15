@@ -3,9 +3,12 @@
 }
 
 .header-title {
-  @apply text-gray-100 text-3xl font-bold py-3;
+  @apply text-gray-100 text-3xl font-bold py-3 pl-10;
 }
 
+.underscore{
+  @apply text-amber-300
+}
 
 .header-search {
   @apply flex-1 mx-4 max-w-[80%];
@@ -17,7 +20,7 @@
 }
 
 .cart-button {
-  @apply relative;
+  @apply relative px-5;
 }
 
 .cart-icon {
@@ -25,5 +28,5 @@
 }
 
 .cart-badge {
-  @apply absolute -top-0 -right-1 bg-red-500 text-white text-base px-2 rounded-full;
+  @apply absolute -top-0 right-2 bg-red-500 text-white text-base px-2 rounded-full;
 }
