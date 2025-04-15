@@ -1,33 +1,37 @@
 import "../styles/NavBar.css";
 import { useCategories } from "../hooks/useCategories";
 
-function NavBar() {
-  const {
-    data: categories,
-    loading,
-    error,
-  } = useCategories();
+function NavBar({ selectedCategory, onSelectCategory }) {
+  const { data: categories, loading, error } = useCategories();
+
+  const handleClick = (category) => {
+    if (onSelectCategory) {
+      onSelectCategory(category);
+    }
+  };
 
   const renderWithSeparators = () => {
     if (!Array.isArray(categories)) return [];
 
     const items = [];
     categories.forEach((category, index) => {
+      const isActive = selectedCategory === encodeURIComponent(category);
+
       items.push(
         <li key={category} className="navbar-item">
-          <a href={`#${category}`} className="navbar-link">
+          <button
+            className={`navbar-link ${isActive ? "active" : ""}`}
+            onClick={() => handleClick(encodeURIComponent(category))}
+
+          >
             {category}
-          </a>
+          </button>
         </li>
       );
 
       if (index < categories.length - 1) {
         items.push(
-          <li
-            key={`sep-${index}`}
-            className="navbar-separator"
-            aria-hidden="true"
-          />
+          <li key={`sep-${index}`} className="navbar-separator" aria-hidden="true" />
         );
       }
     });
@@ -44,5 +48,6 @@ function NavBar() {
     </nav>
   );
 }
+
 
 export { NavBar };

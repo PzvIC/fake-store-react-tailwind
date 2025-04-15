@@ -1,0 +1,32 @@
+.category-grid-container {
+    @apply p-6;
+  }
+  
+  .category-title {
+    @apply text-2xl font-bold mb-4 capitalize;
+  }
+  
+  .category-message {
+    @apply p-6 text-gray-600;
+  }
+  
+  .category-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6;
+  }
+  
+  .category-card {
+    @apply border rounded shadow p-4;
+  }
+  
+  .category-card-image {
+    @apply h-48 w-full object-contain mb-2;
+  }
+  
+  .category-card-title {
+    @apply font-semibold text-lg;
+  }
+  
+  .category-card-price {
+    @apply text-green-600 font-bold;
+  }
+  

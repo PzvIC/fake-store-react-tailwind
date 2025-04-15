@@ -6,6 +6,11 @@
   @apply text-gray-100 text-3xl font-bold py-3 pl-10;
 }
 
+.header-title:hover {
+  @apply text-amber-300;
+  transition: color 0.3s ease;
+}
+
 .underscore{
   @apply text-amber-300
 }

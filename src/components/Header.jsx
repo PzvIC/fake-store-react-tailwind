@@ -2,14 +2,14 @@ import "../styles/Header.css";
 
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
-function Header() {
+function Header({ onGoHome }) {
   return (
     <header className="header-container">
-      <h1 className="header-title">
-        Fake
-        <span className="underscore">_</span>
-        Store
-        <span className="underscore">_</span>
+      <h1
+        className="header-title cursor-pointer"
+        onClick={onGoHome}
+      >
+        Fake<span className="underscore">_</span>Store<span className="underscore">_</span>
       </h1>
 
       <div className="header-search">
@@ -27,5 +27,6 @@ function Header() {
     </header>
   );
 }
+
 
 export { Header };
