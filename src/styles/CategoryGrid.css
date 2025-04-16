@@ -1,32 +1,44 @@
 .category-grid-container {
-    @apply p-6;
-  }
-  
-  .category-title {
-    @apply text-2xl font-bold mb-4 capitalize;
-  }
-  
-  .category-message {
-    @apply p-6 text-gray-600;
-  }
-  
-  .category-grid {
-    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6;
-  }
-  
-  .category-card {
-    @apply border rounded shadow p-4;
-  }
-  
-  .category-card-image {
-    @apply h-48 w-full object-contain mb-2;
-  }
-  
-  .category-card-title {
-    @apply font-semibold text-lg;
-  }
-  
-  .category-card-price {
-    @apply text-green-600 font-bold;
-  }
-  
+  @apply p-6 transition-all duration-700 ease-in-out;
+  margin-top: -800px;
+}
+
+.category-grid {
+  @apply grid mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 max-w-[60%];
+}
+
+.category-card {
+  @apply border rounded-2xl shadow p-4 bg-white flex flex-col justify-between min-h-[450px];
+}
+
+.card-title-block {
+  height: 80px;
+  @apply flex items-center justify-center;
+}
+
+.card-image-block {
+  height: 200px;
+  @apply flex items-center justify-center;
+}
+
+.card-price-block {
+  height: 80px;
+  @apply flex items-center justify-center;
+}
+
+.category-card-title {
+  @apply font-semibold text-lg text-center m-2 text-gray-900;
+}
+
+.category-card-image {
+  @apply w-full object-contain mb-2;
+  height: 80%;
+}
+
+.category-card-price {
+  @apply text-green-600 font-bold m-2 text-3xl text-center;
+}
+
+.category-separator {
+  @apply my-2 border-t border-gray-300 dark:border-gray-600;
+}

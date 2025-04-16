@@ -46,7 +46,7 @@ function App() {
         }}
       />
 
-      <ImgBanner />
+      <ImgBanner selectedCategory={selectedCategory} />
 
       {currentSection === "home" && <MasonryGrid />}
       {selectedCategory && currentSection !== "home" && (
