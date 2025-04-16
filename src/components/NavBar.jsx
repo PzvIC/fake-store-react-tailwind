@@ -15,14 +15,13 @@ function NavBar({ selectedCategory, onSelectCategory }) {
 
     const items = [];
     categories.forEach((category, index) => {
-      const isActive = selectedCategory === encodeURIComponent(category);
+      const isActive = selectedCategory === category;
 
       items.push(
         <li key={category} className="navbar-item">
           <button
             className={`navbar-link ${isActive ? "active" : ""}`}
-            onClick={() => handleClick(encodeURIComponent(category))}
-
+            onClick={() => handleClick(category)}
           >
             {category}
           </button>
@@ -31,7 +30,11 @@ function NavBar({ selectedCategory, onSelectCategory }) {
 
       if (index < categories.length - 1) {
         items.push(
-          <li key={`sep-${index}`} className="navbar-separator" aria-hidden="true" />
+          <li
+            key={`sep-${index}`}
+            className="navbar-separator"
+            aria-hidden="true"
+          />
         );
       }
     });
@@ -48,6 +51,5 @@ function NavBar({ selectedCategory, onSelectCategory }) {
     </nav>
   );
 }
-
 
 export { NavBar };

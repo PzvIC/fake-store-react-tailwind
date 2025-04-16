@@ -1,3 +1,5 @@
+@tailwind utilities;
+
 .category-grid-container {
   @apply p-6 transition-all duration-700 ease-in-out;
   margin-top: -800px;
@@ -22,7 +24,7 @@
 }
 
 .card-price-block {
-  height: 80px;
+  height: 50px;
   @apply flex items-center justify-center;
 }
 
@@ -40,5 +42,15 @@
 }
 
 .category-separator {
-  @apply my-2 border-t border-gray-300 dark:border-gray-600;
+  @apply my-2 border border-gray-600;
+}
+
+@layer utilities {
+  .fade-in {
+    @apply opacity-0 scale-50 transition-all duration-700 ease-out;
+  }
+
+  .fade-in.show {
+    @apply opacity-100 scale-100;
+  }
 }

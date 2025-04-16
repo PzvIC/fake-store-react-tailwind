@@ -1,22 +1,52 @@
 import { useState, useEffect } from "react";
+import { useProducts } from "../hooks/useProducts";
 import "../styles/CategoryGrid.css";
 
 function CategoryGrid({ selectedCategory }) {
-  const [items, setItems] = useState([]);
+  const { items, loading, error, refetch } = useProducts(selectedCategory);
+  const [visibleItems, setVisibleItems] = useState({});
 
   useEffect(() => {
-    if (selectedCategory) {
-      fetch(`https://fakestoreapi.com/products/category/${selectedCategory}`)
-        .then((res) => res.json())
-        .then((data) => setItems(data));
+    if (items.length > 0) {
+      setVisibleItems({});
+      items.forEach((item, i) => {
+        const baseDelay = 500;
+        const delay = baseDelay + i * 150;
+        setTimeout(() => {
+          setVisibleItems((prev) => ({ ...prev, [item.id]: true }));
+        }, delay);
+      });
     }
-  }, [selectedCategory]);
+  }, [items]);
+
+  if (loading) {
+    return <p className="p-6">Loading Products...</p>;
+  }
+
+  if (error) {
+    return (
+      <div className="p-6 text-center">
+        <p className="text-red-500 font-semibold mb-4">{error}</p>
+        <button
+          onClick={refetch}
+          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded transition"
+        >
+          Reintentar
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="category-grid-container">
       <div className="category-grid">
         {items.map((item) => (
-          <div key={item.id} className="category-card">
+          <div
+            key={item.id}
+            className={`category-card fade-in ${
+              visibleItems[item.id] ? "show" : ""
+            }`}
+          >
             <div className="card-title-block">
               <h3 className="category-card-title">{item.title}</h3>
             </div>

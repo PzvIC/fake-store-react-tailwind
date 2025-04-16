@@ -1,41 +1,77 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+
+const STORAGE_KEY = "all-products-cache";
+const TIMESTAMP_KEY = "all-products-cache-timestamp";
+const CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 24 horas
 
 function useProducts(category = null) {
-  const [data, setData] = useState([]);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    // Define la URL según si se quiere filtrar por categoría
-    const url = category
-      ? `https://fakestoreapi.com/products/category/${encodeURIComponent(category)}`
-      : "https://fakestoreapi.com/products";
+  const loadData = useCallback(() => {
+    const now = Date.now();
+    setLoading(true);
+    setError(null);
 
-    fetch(url)
+    fetch("https://fakestoreapi.com/products")
       .then((res) => {
         if (!res.ok) throw new Error("Error al obtener productos");
         return res.json();
       })
-      .then((json) => {
-        // Algunos productos podrían tener imágenes vacías o inválidas
-        const productsWithImages = json.filter(
+      .then((allProducts) => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(allProducts));
+        localStorage.setItem(TIMESTAMP_KEY, now.toString());
+
+        const validProducts = allProducts.filter(
           (product) =>
             product.image &&
             typeof product.image === "string" &&
             product.image.trim() !== ""
         );
 
-        setData(productsWithImages);
-        setLoading(false);
+        const filtered = category
+          ? validProducts.filter((p) => p.category === category)
+          : validProducts;
+
+        setItems(filtered);
       })
       .catch((err) => {
         console.error("Fetch error:", err);
-        setError(err);
-        setLoading(false);
-      });
+        setError("No se pudieron cargar los productos.");
+      })
+      .finally(() => setLoading(false));
   }, [category]);
 
-  return { data, loading, error };
+  useEffect(() => {
+    const cached = localStorage.getItem(STORAGE_KEY);
+    const timestamp = localStorage.getItem(TIMESTAMP_KEY);
+    const now = Date.now();
+
+    const isValid =
+      cached && timestamp && now - Number(timestamp) < CACHE_DURATION_MS;
+
+    if (isValid) {
+      const allProducts = JSON.parse(cached);
+      const validProducts = allProducts.filter(
+        (product) =>
+          product.image &&
+          typeof product.image === "string" &&
+          product.image.trim() !== ""
+      );
+
+      const filtered = category
+        ? validProducts.filter((p) => p.category === category)
+        : validProducts;
+
+      setItems(filtered);
+      setLoading(false);
+    } else {
+      loadData();
+    }
+  }, [category, loadData]);
+
+  return { items, loading, error, refetch: loadData };
 }
 
 export { useProducts };

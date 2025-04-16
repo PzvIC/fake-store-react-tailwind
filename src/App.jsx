@@ -13,21 +13,25 @@ function App() {
 
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash.replace("#", "") || "home";
+      const hash = decodeURIComponent(window.location.hash.replace("#", "")) || "home";
       setCurrentSection(hash);
-
-      if (hash !== "home") {
+  
+      // Solo actualiza si cambia
+      if (hash !== "home" && hash !== selectedCategory) {
         setSelectedCategory(hash);
-      } else {
+      }
+  
+      if (hash === "home" && selectedCategory !== null) {
         setSelectedCategory(null);
       }
     };
-
+  
     window.addEventListener("hashchange", handleHashChange);
     handleHashChange();
-
+  
     return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
+  }, [selectedCategory]);
+  
 
   return (
     <>

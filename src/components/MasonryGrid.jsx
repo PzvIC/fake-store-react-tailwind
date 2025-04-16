@@ -3,7 +3,7 @@ import { FadeInImageCard } from "./FadeInImageCard";
 import "../styles/MasonryGrid.css";
 
 function MasonryGrid({ category }) {
-  const { data: products, loading, error } = useProducts(category);
+  const { items: products, loading, error } = useProducts(category);
 
   if (loading) return <p className="p-4">Cargando productos...</p>;
   if (error) return <p className="p-4 text-red-500">Error: {error.message}</p>;
