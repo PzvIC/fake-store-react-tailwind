@@ -42,7 +42,7 @@
 }
 
 .category-separator {
-  @apply my-2 border border-gray-600;
+  @apply my-2 border-t border-gray-300;
 }
 
 @layer utilities {

@@ -6,7 +6,7 @@ import "../styles/CategoryGrid.css";
 function CategoryGrid({ selectedCategory }) {
   const { items, loading, error, refetch } = useProducts(selectedCategory);
   const [visibleItems, setVisibleItems] = useState({});
-  const [activeProduct, setActiveProduct] = useState(null); // 👈 Modal
+  const [activeProduct, setActiveProduct] = useState(null);
 
   useEffect(() => {
     if (items.length > 0) {
@@ -48,7 +48,7 @@ function CategoryGrid({ selectedCategory }) {
             className={`category-card fade-in ${
               visibleItems[item.id] ? "show" : ""
             } cursor-pointer`}
-            onClick={() => setActiveProduct(item)} // 👈 Click abre modal
+            onClick={() => setActiveProduct(item)}
           >
             <div className="card-title-block">
               <h3 className="category-card-title">{item.title}</h3>

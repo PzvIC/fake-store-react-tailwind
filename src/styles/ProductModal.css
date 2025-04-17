@@ -5,11 +5,12 @@
   }
   
   .modal-container {
-    @apply bg-white  text-gray-800  rounded-xl shadow-lg p-6 w-full max-w-lg relative;
+    @apply bg-white text-gray-800 rounded-xl shadow-lg p-6 w-full max-w-lg relative opacity-0 scale-95 animate-modalIn;
   }
   
+  
   .modal-close {
-    @apply absolute top-2 right-2 text-2xl text-gray-500 hover:text-red-500 font-bold cursor-pointer transition;
+    @apply absolute top-0 right-2 text-3xl text-gray-500 hover:text-red-500 font-bold cursor-pointer;
   }
   
   .modal-title {
@@ -25,19 +26,27 @@
   }
   
   .modal-price {
-    @apply text-center text-base text-gray-700;
+    @apply text-base text-gray-700;
+  }
+
+  .modal-price-span{
+    @apply font-bold ;
+  }
+  
+  .modal-row {
+    @apply flex items-center justify-between my-4;
   }
   
   .modal-quantity {
-    @apply flex items-center justify-center gap-4 my-4;
+    @apply flex items-center gap-2;
   }
   
   .modal-quantity-label {
-    @apply text-sm text-gray-700;
+    @apply text-sm text-gray-700 font-bold;
   }
   
   .modal-input {
-    @apply w-16 p-1 text-center border border-gray-300 rounded;
+    @apply w-16 p-1 text-center border border-gray-300 rounded bg-white text-gray-800;
   }
   
   .modal-button {
@@ -45,19 +54,66 @@
   }
   
   .modal-confirmation {
-    @apply mt-4 text-center text-green-600 font-medium animate-fadeIn;
+    @apply mt-4 text-center text-green-600 font-medium;
   }
-
+  
   @layer utilities {
-    .animate-fadeIn {
-      @apply opacity-0;
-      animation: fadeIn 0.4s ease forwards;
+    @keyframes modalIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  
+    @keyframes modalOut {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
     }
   
     @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
       to {
         opacity: 1;
       }
     }
+  
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+  
+    .animate-modalIn {
+      animation: modalIn 0.1s ease-out forwards;
+    }
+  
+    .animate-modalOut {
+      animation: modalOut 0.1s ease-in forwards;
+    }
+  
+    .animate-fadeIn {
+      animation: fadeIn 0.1s ease-out forwards;
+    }
+  
+    .animate-fadeOut {
+      animation: fadeOut 0.1s ease-in forwards;
+    }
   }
+  
+  
   
