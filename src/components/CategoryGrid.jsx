@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import { useProducts } from "../hooks/useProducts";
+import { ProductModal } from "./ProductModal";
 import "../styles/CategoryGrid.css";
 
 function CategoryGrid({ selectedCategory }) {
   const { items, loading, error, refetch } = useProducts(selectedCategory);
   const [visibleItems, setVisibleItems] = useState({});
+  const [activeProduct, setActiveProduct] = useState(null); // 👈 Modal
 
   useEffect(() => {
     if (items.length > 0) {
       setVisibleItems({});
       items.forEach((item, i) => {
-        const baseDelay = 500;
-        const delay = baseDelay + i * 150;
+        const baseDelay = 300;
+        const delay = baseDelay + i * 100;
         setTimeout(() => {
           setVisibleItems((prev) => ({ ...prev, [item.id]: true }));
         }, delay);
@@ -31,7 +33,7 @@ function CategoryGrid({ selectedCategory }) {
           onClick={refetch}
           className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded transition"
         >
-          Reintentar
+          Try Again
         </button>
       </div>
     );
@@ -45,7 +47,8 @@ function CategoryGrid({ selectedCategory }) {
             key={item.id}
             className={`category-card fade-in ${
               visibleItems[item.id] ? "show" : ""
-            }`}
+            } cursor-pointer`}
+            onClick={() => setActiveProduct(item)} // 👈 Click abre modal
           >
             <div className="card-title-block">
               <h3 className="category-card-title">{item.title}</h3>
@@ -65,6 +68,11 @@ function CategoryGrid({ selectedCategory }) {
           </div>
         ))}
       </div>
+
+      <ProductModal
+        product={activeProduct}
+        onClose={() => setActiveProduct(null)}
+      />
     </div>
   );
 }

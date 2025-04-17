@@ -2,11 +2,11 @@
 
 .category-grid-container {
   @apply p-6 transition-all duration-700 ease-in-out;
-  margin-top: -800px;
+  margin-top: -850px;
 }
 
 .category-grid {
-  @apply grid mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 max-w-[60%];
+  @apply grid mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 lg:max-w-[60%];
 }
 
 .category-card {

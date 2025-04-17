@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 
 const STORAGE_KEY = "all-products-cache";
 const TIMESTAMP_KEY = "all-products-cache-timestamp";
-const CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 24 horas
+const CACHE_DURATION_MS = 24 * 60 * 60 * 1000;
 
 function useProducts(category = null) {
   const [items, setItems] = useState([]);
@@ -16,7 +16,7 @@ function useProducts(category = null) {
 
     fetch("https://fakestoreapi.com/products")
       .then((res) => {
-        if (!res.ok) throw new Error("Error al obtener productos");
+        if (!res.ok) throw new Error("Error fetching products");
         return res.json();
       })
       .then((allProducts) => {
@@ -36,9 +36,9 @@ function useProducts(category = null) {
 
         setItems(filtered);
       })
-      .catch((err) => {
+      .catch((err) => {``
         console.error("Fetch error:", err);
-        setError("No se pudieron cargar los productos.");
+        setError("Could not load products.");
       })
       .finally(() => setLoading(false));
   }, [category]);

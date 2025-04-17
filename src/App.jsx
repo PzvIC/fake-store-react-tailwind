@@ -16,7 +16,6 @@ function App() {
       const hash = decodeURIComponent(window.location.hash.replace("#", "")) || "home";
       setCurrentSection(hash);
   
-      // Solo actualiza si cambia
       if (hash !== "home" && hash !== selectedCategory) {
         setSelectedCategory(hash);
       }
@@ -24,6 +23,8 @@ function App() {
       if (hash === "home" && selectedCategory !== null) {
         setSelectedCategory(null);
       }
+  
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
   
     window.addEventListener("hashchange", handleHashChange);
@@ -31,6 +32,7 @@ function App() {
   
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, [selectedCategory]);
+  
   
 
   return (
