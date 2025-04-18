@@ -11,21 +11,6 @@ function ProductModal({ product, onClose }) {
     setAdded(false);
   }, [product]);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        handleClose();
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      setQuantity(1);
-      setAdded(false);
-    };
-  }, []);
-
   if (!product) return null;
 
   const handleClose = () => {

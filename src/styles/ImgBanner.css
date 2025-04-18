@@ -3,7 +3,6 @@
   background-image: url("../assets/ax.jpg");
 }
 
-/* Movimiento del banner hacia arriba */
 .banner-container.slide-up {
   transform: translateY(-100%);
 }

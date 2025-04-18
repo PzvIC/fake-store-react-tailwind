@@ -12,12 +12,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [currentSection, setCurrentSection] = useState("home");
 
-  const handleToggleCart = () => {
-    const newCategory = selectedCategory === "cart" ? null : "cart";
-    setSelectedCategory(newCategory);
-    setCurrentSection(newCategory === "cart" ? "cart" : "home");
-    window.location.hash = newCategory === "cart" ? "#cart" : "#home";
-  };
+  
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -46,7 +41,8 @@ function App() {
         onGoHome={() => {
           window.location.hash = "#home";
         }}
-        onToggleCart={handleToggleCart}
+        setSelectedCategory={setSelectedCategory}
+        setCurrentSection={setCurrentSection}
       />
 
       <NavBar
@@ -57,12 +53,12 @@ function App() {
         }}
       />
 
+      <ImgBanner selectedCategory={selectedCategory} />
+
       {selectedCategory !== "cart" && (
         <>
-          <ImgBanner selectedCategory={selectedCategory} />
-
           {currentSection === "home" && <MasonryGrid />}
-          
+
           {selectedCategory && currentSection !== "home" && (
             <CategoryGrid selectedCategory={selectedCategory} />
           )}

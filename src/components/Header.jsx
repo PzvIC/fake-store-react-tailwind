@@ -1,7 +1,14 @@
 import "../styles/Header.css";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
-function Header({ onGoHome, onToggleCart }) {
+function Header({ onGoHome, setSelectedCategory, setCurrentSection}) {
+
+  const handleCart = () => {
+    setSelectedCategory("cart");
+    setCurrentSection("cart");
+    window.location.hash = "#cart";
+  };
+
   return (
     <header className="header-container">
       <h1 className="header-title cursor-pointer" onClick={onGoHome}>
@@ -16,7 +23,7 @@ function Header({ onGoHome, onToggleCart }) {
         />
       </div>
 
-      <button className="cart-button" onClick={onToggleCart}>
+      <button className="cart-button" onClick={() => handleCart()}>
         <ShoppingCartIcon className="cart-icon" />
         <span className="cart-badge">3</span>
       </button>

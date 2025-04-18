@@ -3,18 +3,29 @@ import "../styles/Cart.css";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
+  const [animateIn, setAnimateIn] = useState(false);
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCartItems(storedCart);
+
+    const animationTimeout = requestAnimationFrame(() => {
+      setAnimateIn(true);
+    });
+
+    return () => cancelAnimationFrame(animationTimeout);
   }, []);
 
   if (cartItems.length === 0) {
-    return <p className="cart-empty-message">Your cart is empty.</p>;
+    return (
+      <div className={`cart-container ${animateIn ? "show" : ""}`}>
+        <p className="cart-empty-message">Your cart is empty.</p>
+      </div>
+    );
   }
 
   return (
-    <div className="cart-container">
+    <div className={`cart-container ${animateIn ? "show" : ""}`}>
       <h2 className="cart-title">Your Cart</h2>
       <ul className="cart-list">
         {cartItems.map((item) => (
