@@ -11,8 +11,8 @@
   transition: color 0.3s ease;
 }
 
-.underscore{
-  @apply text-amber-300
+.underscore {
+  @apply text-amber-300;
 }
 
 .header-search {
@@ -25,7 +25,7 @@
 }
 
 .cart-button {
-  @apply relative px-5;
+  @apply relative px-5 right-4;
 }
 
 .cart-icon {
@@ -33,5 +33,5 @@
 }
 
 .cart-badge {
-  @apply absolute -top-0 right-2 bg-red-500 text-white text-base px-2 rounded-full;
+  @apply absolute top-1 right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full;
 }

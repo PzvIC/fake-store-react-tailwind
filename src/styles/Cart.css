@@ -1,10 +1,18 @@
-.cart-container {
-  @apply p-6 max-w-4xl mx-auto bg-white rounded shadow mt-[-830px];
-  @apply opacity-0 scale-50 transition-all duration-1000 ease-in-out;
+.cart-wrapper {
+  @apply opacity-0 transition-all; 
 }
 
-.cart-container.show {
-  @apply opacity-100 scale-100;
+.cart-wrapper.show {
+  @apply opacity-100;
+}
+
+.cart-container {
+  @apply p-6 max-w-[80%] mx-auto rounded shadow mt-[-900px];
+  @apply opacity-0 translate-x-4 translate-y-2 transition-all duration-1000 ease-out;
+}
+
+.cart-container.show{
+  @apply opacity-100 translate-x-0 translate-y-0;
 }
 
 .cart-title {
@@ -12,15 +20,19 @@
 }
 
 .cart-empty-message {
-  @apply p-6 text-center text-gray-500;
+  @apply p-6 mt-10 text-center text-gray-100;
+}
+
+.cart-main-layout {
+  @apply flex flex-col lg:flex-row gap-8 max-w-4xl bg-white p-8 rounded-lg;
 }
 
 .cart-list {
-  @apply space-y-4;
+  @apply flex-1 space-y-4;
 }
 
 .cart-item {
-  @apply flex gap-4 items-center border-b border-gray-200  pb-4;
+  @apply flex gap-4 items-center border-b border-gray-200 pb-4;
 }
 
 .cart-item-image {
@@ -28,7 +40,7 @@
 }
 
 .cart-item-info {
-  @apply flex flex-col;
+  @apply flex flex-col w-full;
 }
 
 .cart-item-title {
@@ -38,4 +50,49 @@
 .cart-item-quantity,
 .cart-item-price {
   @apply text-gray-700;
+}
+
+.cart-quantity-input {
+  @apply w-16 px-2 py-1 border rounded text-center mx-2;
+}
+
+.cart-remove-button {
+  @apply bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded ml-4;
+}
+
+.cart-item-controls {
+  @apply flex justify-between items-center mt-6 gap-2;
+}
+
+.cart-summary-fixed {
+  @apply fixed top-44 right-40 w-72 mt-2 bg-gray-50 p-6 rounded shadow-lg h-fit z-40;
+  @apply opacity-0 translate-x-4 translate-y-2 transition-all duration-700 ease-out;
+}
+
+.cart-summary-fixed.show {
+  @apply opacity-100 translate-x-0 translate-y-0;
+}
+
+.summary-title {
+  @apply text-xl font-bold mb-4 text-gray-800;
+}
+
+.summary-line {
+  @apply text-gray-700 mb-2;
+}
+
+.summary-total {
+  @apply text-lg font-bold text-gray-900 mt-4;
+}
+
+.summary-separator {
+  @apply my-4 border-t border-gray-300;
+}
+
+.checkout-button {
+  @apply mt-12 w-full bg-amber-400 text-gray-700 text-center font-semibold py-2 rounded-lg transition-all duration-300 ease-in-out shadow;
+}
+
+.checkout-button:hover {
+  @apply bg-amber-500 scale-105 shadow-lg;
 }

@@ -1,7 +1,30 @@
-import "../styles/Header.css";
+import { useEffect, useState } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import "../styles/Header.css";
 
-function Header({ onGoHome, setSelectedCategory, setCurrentSection}) {
+function Header({ onGoHome, setSelectedCategory, setCurrentSection }) {
+  const [itemCount, setItemCount] = useState(0);
+
+  useEffect(() => {
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+      setItemCount(total);
+    };
+
+    updateCartCount();
+
+    // 🔄 Escucha más eventos que podrían indicar cambios
+    window.addEventListener("cartUpdated", updateCartCount);
+    window.addEventListener("hashchange", updateCartCount);
+    window.addEventListener("focus", updateCartCount); // por si vuelve de otra pestaña
+
+    return () => {
+      window.removeEventListener("cartUpdated", updateCartCount);
+      window.removeEventListener("hashchange", updateCartCount);
+      window.removeEventListener("focus", updateCartCount);
+    };
+  }, []);
 
   const handleCart = () => {
     setSelectedCategory("cart");
@@ -12,7 +35,8 @@ function Header({ onGoHome, setSelectedCategory, setCurrentSection}) {
   return (
     <header className="header-container">
       <h1 className="header-title cursor-pointer" onClick={onGoHome}>
-        Fake<span className="underscore">_</span>Store<span className="underscore">_</span>
+        Fake<span className="underscore">_</span>Store
+        <span className="underscore">_</span>
       </h1>
 
       <div className="header-search">
@@ -23,9 +47,13 @@ function Header({ onGoHome, setSelectedCategory, setCurrentSection}) {
         />
       </div>
 
-      <button className="cart-button" onClick={() => handleCart()}>
+      <button className="cart-button" onClick={handleCart}>
         <ShoppingCartIcon className="cart-icon" />
-        <span className="cart-badge">3</span>
+        {itemCount > 0 && (
+          <span className="cart-badge">
+            {itemCount > 9 ? "9+" : itemCount}
+          </span>
+        )}
       </button>
     </header>
   );

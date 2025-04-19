@@ -30,7 +30,7 @@ function ProductModal({ product, onClose }) {
   const handleAddToCart = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const existingIndex = cart.findIndex((item) => item.id === product.id);
-
+  
     if (existingIndex >= 0) {
       cart[existingIndex].quantity += quantity;
     } else {
@@ -42,11 +42,15 @@ function ProductModal({ product, onClose }) {
         quantity: quantity,
       });
     }
-
+  
     localStorage.setItem("cart", JSON.stringify(cart));
+  
+    window.dispatchEvent(new Event("cartUpdated"));
+  
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
+  
 
   return (
     <div

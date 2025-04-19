@@ -12,8 +12,6 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [currentSection, setCurrentSection] = useState("home");
 
-  
-
   useEffect(() => {
     const handleHashChange = () => {
       const hash =
@@ -36,7 +34,7 @@ function App() {
   }, [selectedCategory]);
 
   return (
-    <>
+    <div className="app-wrapper">
       <Header
         onGoHome={() => {
           window.location.hash = "#home";
@@ -55,20 +53,22 @@ function App() {
 
       <ImgBanner selectedCategory={selectedCategory} />
 
-      {selectedCategory !== "cart" && (
-        <>
-          {currentSection === "home" && <MasonryGrid />}
+      <main className="main-content">
+        {selectedCategory !== "cart" && (
+          <>
+            {currentSection === "home" && <MasonryGrid />}
 
-          {selectedCategory && currentSection !== "home" && (
-            <CategoryGrid selectedCategory={selectedCategory} />
-          )}
-        </>
-      )}
+            {selectedCategory && currentSection !== "home" && (
+              <CategoryGrid selectedCategory={selectedCategory} />
+            )}
+          </>
+        )}
 
-      {selectedCategory === "cart" && <Cart />}
+        {selectedCategory === "cart" && <Cart />}
+      </main>
 
       <Footer />
-    </>
+    </div>
   );
 }
 
