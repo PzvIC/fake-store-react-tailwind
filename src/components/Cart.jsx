@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useIsTablet } from "../hooks/useIsTablet";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { createPortal } from "react-dom";
 import "../styles/Cart.css";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [animateIn, setAnimateIn] = useState(false);
   const [showSummary, setShowSummary] = useState(true);
-  const isCompact = useIsTablet(1160);
+  const isCompact = useIsTablet(1040);
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -26,7 +27,6 @@ function Cart() {
     );
     setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
@@ -34,7 +34,6 @@ function Cart() {
     const updatedCart = cartItems.filter((item) => item.id !== id);
     setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
@@ -47,49 +46,35 @@ function Cart() {
     const total = subtotal + tax;
 
     if (isCompact) {
-      return (
-        <>
-          {/* Botón SIEMPRE visible, pegado al borde derecho */}
-          {!showSummary && (
+      return createPortal(
+        <div
+          className={`summary-panel-vertical ${showSummary ? "visible" : ""}`}
+        >
+          <div className="summary-close-wrapper">
             <button
-              className="summary-floating-toggle-button"
-              onClick={() => setShowSummary(true)}
+              className="summary-close-button"
+              onClick={() => setShowSummary(false)}
             >
-              <ChevronLeftIcon className="w-5 h-5 text-white" />
+              <ChevronLeftIcon className="icon-chevron rotated" />
             </button>
-          )}
-
-          <div
-            className={`cart-summary-vertical ${
-              showSummary ? "translate-x-0" : ""
-            }`}
-          >
-            {/* Botón para cerrar dentro del panel */}
-            <div className="p-2 flex justify-end">
-              <button
-                className="summary-close-button"
-                onClick={() => setShowSummary(false)}
-              >
-                <ChevronLeftIcon className="w-5 h-5 text-white rotate-180" />
-              </button>
-            </div>
-
-            <div className="p-4 flex flex-col gap-4">
-              <h3 className="summary-title">Summary</h3>
-              <hr className="summary-separator" />
-              <p className="summary-line">Subtotal: ${subtotal.toFixed(2)}</p>
-              <p className="summary-line">Tax (10%): ${tax.toFixed(2)}</p>
-              <hr className="summary-separator" />
-              <p className="summary-total">Total: ${total.toFixed(2)}</p>
-              <button className="checkout-button">Checkout</button>
-            </div>
           </div>
-        </>
+
+          <div className="summary-content">
+            <h3 className="summary-title">Summary</h3>
+            <hr className="summary-separator" />
+            <p className="summary-line">Subtotal: ${subtotal.toFixed(2)}</p>
+            <p className="summary-line">Tax (10%): ${tax.toFixed(2)}</p>
+            <hr className="summary-separator" />
+            <p className="summary-total">Total: ${total.toFixed(2)}</p>
+            <button className="checkout-button">Checkout</button>
+          </div>
+        </div>,
+        document.getElementById("portal-root")
       );
     }
 
-    return (
-      <div className={`cart-summary-fixed ${animateIn ? "show" : ""}`}>
+    return createPortal(
+      <div className={`summary-panel-fixed ${animateIn ? "visible" : ""}`}>
         <h3 className="summary-title">Summary</h3>
         <hr className="summary-separator" />
         <p className="summary-line">Subtotal: ${subtotal.toFixed(2)}</p>
@@ -97,24 +82,24 @@ function Cart() {
         <hr className="summary-separator" />
         <p className="summary-total">Total: ${total.toFixed(2)}</p>
         <button className="checkout-button">Checkout</button>
-      </div>
+      </div>,
+      document.getElementById("portal-root")
     );
   };
 
   if (cartItems.length === 0) {
     return (
-      <div className={`cart-container cart-empty ${animateIn ? "show" : ""}`}>
+      <div className={`cart-container empty ${animateIn ? "visible" : ""}`}>
         <p className="cart-empty-message">Your cart is empty.</p>
       </div>
     );
   }
 
   return (
-    <div className={`cart-wrapper ${animateIn ? "show" : ""}`}>
-      <div className={`cart-container ${animateIn ? "show" : ""}`}>
-        <h2 className="cart-title">Your Cart</h2>
+    <div className={`cart-wrapper ${animateIn ? "visible" : ""}`}>
+      <div className={`cart-container ${animateIn ? "visible" : ""}`}>
 
-        <div className={`cart-main-layout ${isCompact ? "compact" : ""}`}>
+        <div className={`cart-layout ${isCompact ? "compact" : ""}`}>
           <ul className="cart-list">
             {cartItems.map((item) => (
               <li key={item.id} className="cart-item">
@@ -157,6 +142,20 @@ function Cart() {
       </div>
 
       {renderSummary()}
+
+      {isCompact &&
+        !showSummary &&
+        createPortal(
+          <button
+            className="summary-floating-button summary-vertical-label"
+            onClick={() => setShowSummary(true)}
+          >
+            
+            <span className="summary-label-text">Summary</span>
+            <ChevronLeftIcon className="icon-chevron arrow-before-text" />
+          </button>,
+          document.getElementById("portal-root")
+        )}
     </div>
   );
 }
