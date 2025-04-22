@@ -1,18 +1,16 @@
 .footer-container {
-  @apply bg-gray-950 text-gray-100 mt-20 p-14 rounded-lg rounded-t-[100px];
+  @apply bg-gray-950 text-gray-100 mt-20 p-6 sm:p-10 md:p-14 md:rounded-t-[100px] rounded-t-[50px];
   box-shadow: 0 -8px 12px rgba(253, 230, 138, 0.4);
 }
 
-
 .footer-links {
-  @apply flex items-center justify-center text-lg font-medium;
+  @apply flex flex-wrap items-center justify-center sm:gap-x-2 md:gap-x-6 gap-y-2 text-base sm:text-lg font-medium;
 }
 
 .footer-links li a {
-  @apply px-48 py-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-800 transition-colors;
+  @apply px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 py-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-800 transition-colors;
 }
 
-
 .footer-separator {
-  @apply text-amber-300 text-xl select-none;
+  @apply text-amber-300 text-xl select-none px-2;
 }

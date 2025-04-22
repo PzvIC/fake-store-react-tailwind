@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const CATEGORIES_KEY = "categories-cache";
 const CATEGORIES_TIMESTAMP_KEY = "categories-cache-timestamp";
-const CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 24 horas
+const CACHE_DURATION_MS = 24 * 60 * 60 * 1000;
 
 function useCategories(
   endpoint = "https://fakestoreapi.com/products/categories"
@@ -23,7 +23,7 @@ function useCategories(
     } else {
       fetch(endpoint)
         .then((res) => {
-          if (!res.ok) throw new Error("Error al obtener categorías");
+          if (!res.ok) throw new Error("Error at fetching Categories");
           return res.json();
         })
         .then((json) => {

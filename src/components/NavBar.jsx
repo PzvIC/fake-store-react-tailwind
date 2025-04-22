@@ -1,14 +1,28 @@
 import "../styles/NavBar.css";
 import { useCategories } from "../hooks/useCategories";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 function NavBar({ selectedCategory, onSelectCategory }) {
   const { data: categories, loading, error } = useCategories();
+  const isMobile = useIsMobile();
 
   const handleClick = (category) => {
     if (onSelectCategory) {
       onSelectCategory(category);
     }
   };
+
+  const shortenCategory = (category) => {
+    if (!isMobile) return category;
+  
+    const lower = category.toLowerCase();
+  
+    if (lower === "men's clothing") return "Men's";
+    if (lower === "women's clothing") return "Women's";
+  
+    return category.length > 10 ? category.slice(0, 8) + "…" : category;
+  };
+  
 
   const renderWithSeparators = () => {
     if (!Array.isArray(categories)) return [];
@@ -23,7 +37,7 @@ function NavBar({ selectedCategory, onSelectCategory }) {
             className={`navbar-link ${isActive ? "active" : ""}`}
             onClick={() => handleClick(category)}
           >
-            {category}
+            {shortenCategory(category)}
           </button>
         </li>
       );

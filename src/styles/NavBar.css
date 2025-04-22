@@ -15,7 +15,7 @@
 }
 
 .navbar-link.active {
-  @apply text-gray-950 bg-amber-300 rounded ;
+  @apply text-gray-950 bg-amber-300 rounded;
 }
 
 

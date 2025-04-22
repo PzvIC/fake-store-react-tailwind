@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import "../styles/FadeInImageCard.css";
 
-function FadeInImageCard({ product }) {
+function FadeInImageCard({ product, onClick }) {
   const imgRef = useRef();
   const [isVisible, setIsVisible] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -22,13 +22,13 @@ function FadeInImageCard({ product }) {
   }, []);
 
   return (
-    <div className="masonry-item relative">
-      {/* Placeholder */}
+    <div
+      className="masonry-item"
+      onClick={() => onClick?.(product)}
+    >
       {(!isLoaded || !isVisible) && (
-        <div className="image-placeholder absolute top-0 left-0 w-full h-full z-10" />
+        <div className="image-placeholder" />
       )}
-
-      {/* Imagen real */}
       <img
         ref={imgRef}
         src={product.image}

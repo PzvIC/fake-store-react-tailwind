@@ -56,7 +56,9 @@ function App() {
       <main className="main-content">
         {selectedCategory !== "cart" && (
           <>
-            {currentSection === "home" && <MasonryGrid />}
+            {currentSection === "home" && 
+              <MasonryGrid />
+            }
 
             {selectedCategory && currentSection !== "home" && (
               <CategoryGrid selectedCategory={selectedCategory} />

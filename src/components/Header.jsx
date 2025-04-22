@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { useIsMobile } from "../hooks/useIsMobile";
 import "../styles/Header.css";
 
 function Header({ onGoHome, setSelectedCategory, setCurrentSection }) {
   const [itemCount, setItemCount] = useState(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const updateCartCount = () => {
@@ -14,10 +16,9 @@ function Header({ onGoHome, setSelectedCategory, setCurrentSection }) {
 
     updateCartCount();
 
-    // 🔄 Escucha más eventos que podrían indicar cambios
     window.addEventListener("cartUpdated", updateCartCount);
     window.addEventListener("hashchange", updateCartCount);
-    window.addEventListener("focus", updateCartCount); // por si vuelve de otra pestaña
+    window.addEventListener("focus", updateCartCount);
 
     return () => {
       window.removeEventListener("cartUpdated", updateCartCount);
@@ -35,8 +36,17 @@ function Header({ onGoHome, setSelectedCategory, setCurrentSection }) {
   return (
     <header className="header-container">
       <h1 className="header-title cursor-pointer" onClick={onGoHome}>
-        Fake<span className="underscore">_</span>Store
-        <span className="underscore">_</span>
+        {isMobile ? (
+          <>
+            F<span className="underscore">_</span>S
+            <span className="underscore">_</span>
+          </>
+        ) : (
+          <>
+            Fake<span className="underscore">_</span>
+            Store<span className="underscore">_</span>
+          </>
+        )}
       </h1>
 
       <div className="header-search">
@@ -50,9 +60,7 @@ function Header({ onGoHome, setSelectedCategory, setCurrentSection }) {
       <button className="cart-button" onClick={handleCart}>
         <ShoppingCartIcon className="cart-icon" />
         {itemCount > 0 && (
-          <span className="cart-badge">
-            {itemCount > 9 ? "9+" : itemCount}
-          </span>
+          <span className="cart-badge">{itemCount > 9 ? "9+" : itemCount}</span>
         )}
       </button>
     </header>
