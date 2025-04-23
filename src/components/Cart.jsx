@@ -8,7 +8,7 @@ function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [animateIn, setAnimateIn] = useState(false);
   const [showSummary, setShowSummary] = useState(true);
-  const isCompact = useIsTablet(1040);
+  const isCompact = useIsTablet(1300);
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -16,7 +16,7 @@ function Cart() {
 
     const timeout = setTimeout(() => {
       setAnimateIn(true);
-    }, 30);
+    }, 100);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -48,7 +48,9 @@ function Cart() {
     if (isCompact) {
       return createPortal(
         <div
-          className={`summary-panel-vertical ${showSummary ? "visible" : ""}`}
+          className={`summary-panel-vertical ${
+            showSummary ? "visible" : ""
+          }`}
         >
           <div className="summary-close-wrapper">
             <button
@@ -74,7 +76,9 @@ function Cart() {
     }
 
     return createPortal(
-      <div className={`summary-panel-fixed ${animateIn ? "visible" : ""}`}>
+      <div
+        className={`summary-panel-fixed fade-in ${animateIn ? "visible" : ""}`}
+      >
         <h3 className="summary-title">Summary</h3>
         <hr className="summary-separator" />
         <p className="summary-line">Subtotal: ${subtotal.toFixed(2)}</p>
@@ -89,52 +93,56 @@ function Cart() {
 
   if (cartItems.length === 0) {
     return (
-      <div className={`cart-container empty ${animateIn ? "visible" : ""}`}>
+      <div className={`cart-container empty`}>
         <p className="cart-empty-message">Your cart is empty.</p>
       </div>
     );
   }
 
   return (
-    <div className={`cart-wrapper ${animateIn ? "visible" : ""}`}>
-      <div className={`cart-container ${animateIn ? "visible" : ""}`}>
-
+    <div className="cart-wrapper">
+      <div className={`cart-container fade-in ${animateIn ? "visible" : ""}`}>
         <div className={`cart-layout ${isCompact ? "compact" : ""}`}>
           <ul className="cart-list">
-            {cartItems.map((item) => (
-              <li key={item.id} className="cart-item">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="cart-item-image"
-                />
-                <div className="cart-item-info">
-                  <h3 className="cart-item-title">{item.title}</h3>
-                  <p className="cart-item-price">
-                    ${(item.price * item.quantity).toFixed(2)}
-                  </p>
-                  <div className="cart-item-controls">
-                    <label>
-                      Qty:
-                      <input
-                        type="number"
-                        min="1"
-                        value={item.quantity}
-                        onChange={(e) =>
-                          updateQuantity(item.id, parseInt(e.target.value))
-                        }
-                        className="cart-quantity-input"
-                      />
-                    </label>
-
-                    <button
-                      onClick={() => removeItem(item.id)}
-                      className="cart-remove-button"
-                    >
-                      Remove
-                    </button>
+            {cartItems.map((item, index) => (
+              <li key={item.id}>
+                <div className="cart-item">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="cart-item-image"
+                  />
+                  <div className="cart-item-info">
+                    <h3 className="cart-item-title">{item.title}</h3>
+                    <p className="cart-item-price">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </p>
+                    <div className="cart-item-controls">
+                      <label>
+                        Qty:
+                        <input
+                          type="number"
+                          min="1"
+                          value={item.quantity}
+                          onChange={(e) =>
+                            updateQuantity(item.id, parseInt(e.target.value))
+                          }
+                          className="cart-quantity-input"
+                        />
+                      </label>
+                      <button
+                        onClick={() => removeItem(item.id)}
+                        className="cart-remove-button"
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
                 </div>
+
+                {index < cartItems.length - 1 && (
+                  <hr className="cart-separator" />
+                )}
               </li>
             ))}
           </ul>
@@ -150,8 +158,7 @@ function Cart() {
             className="summary-floating-button summary-vertical-label"
             onClick={() => setShowSummary(true)}
           >
-            
-            <span className="summary-label-text">Summary</span>
+            <span className="summary-label-text">Checkout</span>
             <ChevronLeftIcon className="icon-chevron arrow-before-text" />
           </button>,
           document.getElementById("portal-root")
