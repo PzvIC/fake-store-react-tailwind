@@ -3,7 +3,13 @@ import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { useIsMobile } from "../hooks/useIsMobile";
 import "../styles/Header.css";
 
-function Header({ onGoHome, setSelectedCategory, setCurrentSection }) {
+function Header({
+  onGoHome,
+  setSelectedCategory,
+  setCurrentSection,
+  setSearchTerm,
+  searchTerm,
+}) {
   const [itemCount, setItemCount] = useState(0);
   const isMobile = useIsMobile();
 
@@ -28,6 +34,7 @@ function Header({ onGoHome, setSelectedCategory, setCurrentSection }) {
   }, []);
 
   const handleCart = () => {
+    setSearchTerm("");
     setSelectedCategory("cart");
     setCurrentSection("cart");
     window.location.hash = "#cart";
@@ -54,6 +61,8 @@ function Header({ onGoHome, setSelectedCategory, setCurrentSection }) {
           type="text"
           placeholder="What are you looking for?"
           className="search-input"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 

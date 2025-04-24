@@ -1,9 +1,9 @@
 .header-container {
-  @apply fixed top-0 left-0 w-full z-50 shadow p-4 justify-between bg-gray-800/85 flex;
+  @apply fixed top-0 left-0 w-full z-50 shadow p-4 justify-between bg-gray-800/85 flex 3xl:py-6;
 }
 
 .header-title {
-  @apply text-gray-100 text-4xl font-bold pt-2 md:pl-10 pl-3;
+  @apply text-gray-100 text-4xl 3xl:text-6xl font-bold pt-2 md:pl-10 pl-3;
 }
 
 .header-title:hover {
@@ -20,8 +20,8 @@
 }
 
 .search-input {
-  @apply w-full px-4 py-2 my-2 bg-gray-950 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-amber-300 text-gray-100
-  placeholder:text-gray-100;
+  @apply w-full px-4 py-2 3xl:py-4 my-2 bg-gray-950 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-amber-300 text-gray-100
+  placeholder:text-gray-100 3xl:placeholder:text-2xl;
 }
 
 .cart-button {
@@ -29,9 +29,10 @@
 }
 
 .cart-icon {
-  @apply h-10 w-10 text-amber-300;
+  @apply h-10 w-10 3xl:h-14 3xl:w-14 text-amber-300;
 }
 
 .cart-badge {
-  @apply absolute top-1 md:right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full;
+  @apply absolute top-1 md:right-2 bg-red-500 text-white text-xs 3xl:text-base font-bold 
+  px-2 3xl:px-3 py-0.5 3xl:py-1 rounded-full;
 }

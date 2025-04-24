@@ -1,0 +1,21 @@
+.search-grid-container {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6;
+    margin-top: -850px;
+  }
+  
+  .search-grid-item {
+    @apply bg-white rounded shadow p-4 flex flex-col items-center text-center;
+  }
+  
+  .search-grid-image {
+    @apply w-32 h-32 object-contain mb-2;
+  }
+  
+  .search-grid-title {
+    @apply text-lg font-semibold text-gray-800 mb-1;
+  }
+  
+  .search-grid-price {
+    @apply text-green-600 font-bold;
+  }
+  

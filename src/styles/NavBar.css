@@ -1,5 +1,5 @@
 .navbar {
-  @apply fixed top-20 left-0 w-full z-50 bg-gray-950 px-4 py-2 shadow-lg border-none;
+  @apply fixed top-20 3xl:top-28 left-0 w-full z-50 bg-gray-950 px-4 py-2 shadow-lg border-none 3xl:py-4;
 }
 
 .navbar-list {
@@ -11,7 +11,7 @@
 }
 
 .navbar-link {
-  @apply block w-full px-4 py-2 text-sm font-medium text-gray-100 hover:bg-gray-800 hover:text-white transition duration-200 rounded capitalize;
+  @apply block w-full px-4 py-2  text-sm 3xl:text-2xl font-medium text-gray-100 hover:bg-gray-800 hover:text-white transition duration-200 rounded capitalize;
 }
 
 .navbar-link.active {
@@ -20,5 +20,5 @@
 
 
 .navbar-separator {
-  @apply w-px h-8 bg-amber-300;
+  @apply w-px h-8 3xl:h-12 bg-amber-300;
 }
