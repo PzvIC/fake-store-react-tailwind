@@ -14,7 +14,7 @@
   @apply text-3xl font-bold my-6 text-gray-50;
 }
 .cart-empty-message {
-  @apply p-6 mt-10 text-center text-gray-100;
+  @apply p-6 mt-10 text-center text-amber-300;
 }
 
 /* LAYOUT Y LISTA DE ITEMS */

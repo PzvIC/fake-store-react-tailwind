@@ -1,21 +1,72 @@
+@tailwind utilities;
+
 .search-grid-container {
-    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6;
+  @apply p-6 max-w-[1300px] mx-auto;
+  margin-top: -850px;
+}
+
+.search-grid {
+  @apply 3xl:mt-10 grid mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 lg:max-w-[60%];
+}
+
+.search-grid-item {
+  @apply border rounded-2xl shadow p-4 bg-white flex flex-col justify-between min-h-[450px] cursor-pointer;
+  @apply transform transition-transform duration-700 ease-in-out hover:scale-105 hover:-translate-y-1;
+}
+
+.card-title-block {
+  height: 80px;
+  @apply flex items-center justify-center;
+}
+
+.card-image-block {
+  height: 200px;
+  @apply flex items-center justify-center;
+}
+
+.card-price-block {
+  height: 50px;
+  @apply flex items-center justify-center;
+}
+
+.search-grid-title {
+  @apply font-semibold text-lg text-center m-2 text-gray-900;
+}
+
+.search-grid-image {
+  @apply w-full object-contain mb-2;
+  height: 80%;
+}
+
+.search-grid-price {
+  @apply text-green-600 font-bold m-2 text-3xl text-center;
+}
+
+.search-separator{
+    @apply my-2 border-t border-gray-300;
+}
+
+.search-loading{
+    @apply p-4 text-amber-300 flex justify-center;
     margin-top: -850px;
+}
+
+.search-error{
+    @apply p-4 text-red-500 flex justify-center;
+    margin-top: -850px;
+}
+
+.search-no-product{
+    @apply p-4 text-amber-300 flex justify-center;
+    margin-top: -850px;
+}   
+
+@layer utilities {
+  .fade-in {
+    @apply opacity-0 scale-50 transition-all duration-700 ease-out;
   }
-  
-  .search-grid-item {
-    @apply bg-white rounded shadow p-4 flex flex-col items-center text-center;
+
+  .fade-in.show {
+    @apply opacity-100 scale-100;
   }
-  
-  .search-grid-image {
-    @apply w-32 h-32 object-contain mb-2;
-  }
-  
-  .search-grid-title {
-    @apply text-lg font-semibold text-gray-800 mb-1;
-  }
-  
-  .search-grid-price {
-    @apply text-green-600 font-bold;
-  }
-  
+}
