@@ -7,7 +7,7 @@ import "../styles/Cart.css";
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [animateIn, setAnimateIn] = useState(false);
-  const [showSummary, setShowSummary] = useState(true);
+  const [showSummary, setShowSummary] = useState(false);
   const isCompact = useIsTablet(1300);
 
   useEffect(() => {
