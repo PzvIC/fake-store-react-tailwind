@@ -62,7 +62,20 @@ function Header({
           placeholder="What are you looking for?"
           className="search-input"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            setSearchTerm(value);
+
+            if (value.trim() === "") {
+              setSelectedCategory(null);
+              setCurrentSection("home");
+              window.location.hash = "#home";
+            } else {
+              setSelectedCategory("searching");
+              setCurrentSection("searching");
+              window.location.hash = "#searching";
+            }
+          }}
         />
       </div>
 

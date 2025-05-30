@@ -1,5 +1,5 @@
 .banner-container {
-  @apply relative bg-cover bg-center w-full h-[1000px] mx-auto flex items-start justify-start px-10 pt-32 rounded-b-[100px] transition-transform duration-700 ease-in-out;
+  @apply relative z-40 bg-cover bg-center w-full h-[1000px] mx-auto flex items-start justify-start px-10 pt-32 rounded-b-[100px] transition-transform duration-700 ease-in-out;
   background-image: url("../assets/ax.jpg");
 }
 

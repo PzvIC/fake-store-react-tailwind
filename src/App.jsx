@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { ImgBanner } from "./components/ImgBanner";
@@ -14,6 +14,10 @@ import { Contact } from "./pages/contact.jsx"; // <-- Importa la nueva página C
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [selectedCategory]);
 
   return (
     <Router>
@@ -47,23 +51,31 @@ function App() {
                   <SearchGrid searchTerm={searchTerm} />
                 ) : (
                   <>
-                    {selectedCategory !== "cart" ? (
+                    {selectedCategory === "cart" ? (
+                      <Cart />
+                    ) : selectedCategory === "contact" ? (
+                      <Contact />
+                    ) : (
                       <>
                         {!selectedCategory && <MasonryGrid />}
-                        {selectedCategory && <CategoryGrid selectedCategory={selectedCategory} />}
+                        {selectedCategory && (
+                          <CategoryGrid selectedCategory={selectedCategory} />
+                        )}
                       </>
-                    ) : (
-                      <Cart />
                     )}
                   </>
                 )
               }
             />
-            <Route path="/contact" element={<Contact />} /> {/* Nueva ruta */}
           </Routes>
         </main>
 
-        <Footer />
+        <Footer
+          onSelectCategory={(category) => {
+            setSearchTerm("");
+            setSelectedCategory(category);
+          }}
+        />
       </div>
     </Router>
   );

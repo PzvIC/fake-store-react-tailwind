@@ -1,5 +1,5 @@
 .contact-section {
-  @apply py-32 flex flex-col items-center justify-center px-4 text-center text-amber-300 animate-fade-in;
+  @apply py-32 flex flex-col items-center justify-center px-4 text-center text-amber-300 animate-fade-in mt-[-900px];
 }
 
 .contact-heading {

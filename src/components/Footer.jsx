@@ -1,25 +1,28 @@
 import "../styles/Footer.css";
-import { Link } from "react-router-dom";
 
-function Footer() {
+function Footer({ onSelectCategory }) {
+  const handleClick = (category) => {
+    onSelectCategory(category);
+  };
+
   return (
     <footer className="footer-container">
       <nav className="footer-nav">
         <ul className="footer-links">
           <li>
-            <a href="#home">Home</a>
+            <button onClick={() => handleClick(null)}>Home</button>
           </li>
           <li>
             <span className="footer-separator">|</span>
           </li>
           <li>
-            <a href="#about">About</a>
+            <button onClick={() => alert("About section coming soon!")}>About</button>
           </li>
           <li>
             <span className="footer-separator">|</span>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <button onClick={() => handleClick("contact")}>Contact</button>
           </li>
         </ul>
       </nav>
