@@ -1,0 +1,64 @@
+.contact-section {
+  @apply py-32 flex flex-col items-center justify-center px-4 text-center text-amber-300 animate-fade-in;
+}
+
+.contact-heading {
+  @apply text-2xl md:text-3xl font-bold mb-4;
+}
+
+.contact-paragraph {
+  @apply text-base md:text-lg mb-6 max-w-xl;
+}
+
+.contact-icons-3,
+.contact-icons-2 {
+  @apply flex gap-6 text-5xl align-middle justify-center;
+}
+
+.contact-link {
+  @apply relative flex items-center justify-center transition-colors;
+}
+
+.linkedin {
+  @apply text-blue-400 hover:text-blue-600;
+}
+
+.github {
+  @apply text-purple-400 hover:text-purple-600;
+}
+
+.upwork-logo {
+  @apply w-32 h-auto opacity-70 hover:opacity-100;
+}
+
+.freelancer {
+  @apply text-blue-400 hover:text-blue-600;
+}
+
+.fiverr {
+  @apply text-green-400 hover:text-green-600 text-8xl;
+}
+
+.tooltip {
+  @apply absolute top-full mt-3 text-xs px-2 py-1 bg-black text-white rounded opacity-0 scale-90 pointer-events-none transition-all duration-200 ease-in-out whitespace-nowrap z-10;
+  transform-origin: center;
+}
+
+.group:hover .tooltip {
+  @apply opacity-100 scale-100;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out both;
+}

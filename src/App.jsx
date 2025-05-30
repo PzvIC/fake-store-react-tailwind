@@ -1,5 +1,6 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { ImgBanner } from "./components/ImgBanner";
 import { NavBar } from "./components/NavBar";
@@ -8,92 +9,63 @@ import { CategoryGrid } from "./components/CategoryGrid";
 import { Footer } from "./components/Footer";
 import { Cart } from "./components/Cart";
 import { SearchGrid } from "./components/SearchGrid";
+import { Contact } from "./pages/contact.jsx"; // <-- Importa la nueva página Contact
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [currentSection, setCurrentSection] = useState("home");
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash =
-        decodeURIComponent(window.location.hash.replace("#", "")) || "home";
-      setCurrentSection(hash);
-
-      if (hash !== "home" && hash !== selectedCategory) {
-        setSelectedCategory(hash);
-      } else if (hash === "home" && selectedCategory !== null) {
-        setSelectedCategory(null);
-      }
-
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-    handleHashChange();
-
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, [selectedCategory]);
-
-  useEffect(() => {
-    if (searchTerm.trim() !== "") {
-      setSelectedCategory("search");
-      setCurrentSection("search");
-      window.location.hash = "#search";
-    } else if (selectedCategory === "search") {
-      setSelectedCategory(null);
-      setCurrentSection("home");
-      window.location.hash = "#home";
-    }
-  }, [searchTerm]);
-
   return (
-    <div className="app-wrapper">
-      <Header
-        onGoHome={() => {
-          window.location.hash = "#home";
-          setSearchTerm("");
-        }}
-        setSelectedCategory={setSelectedCategory}
-        setCurrentSection={setCurrentSection}
-        setSearchTerm={setSearchTerm}
-        searchTerm={searchTerm}
-      />
+    <Router>
+      <div className="app-wrapper">
+        <Header
+          onGoHome={() => {
+            setSelectedCategory(null);
+            setSearchTerm("");
+          }}
+          setSelectedCategory={setSelectedCategory}
+          setSearchTerm={setSearchTerm}
+          searchTerm={searchTerm}
+        />
 
-      <NavBar
-        selectedCategory={selectedCategory}
-        onSelectCategory={(category) => {
-          setSearchTerm("");
-          setSelectedCategory(category);
-          setCurrentSection(category);
-          window.location.hash = `#${category}`;
-        }}
-      />
+        <NavBar
+          selectedCategory={selectedCategory}
+          onSelectCategory={(category) => {
+            setSearchTerm("");
+            setSelectedCategory(category);
+          }}
+        />
 
-      <ImgBanner selectedCategory={selectedCategory} />
+        <ImgBanner selectedCategory={selectedCategory} />
 
-      <main className="main-content">
-        {searchTerm ? (
-          <SearchGrid searchTerm={searchTerm} />
-        ) : (
-          <>
-            {selectedCategory !== "cart" && (
-              <>
-                {currentSection === "home" && <MasonryGrid />}
+        <main className="main-content">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                searchTerm ? (
+                  <SearchGrid searchTerm={searchTerm} />
+                ) : (
+                  <>
+                    {selectedCategory !== "cart" ? (
+                      <>
+                        {!selectedCategory && <MasonryGrid />}
+                        {selectedCategory && <CategoryGrid selectedCategory={selectedCategory} />}
+                      </>
+                    ) : (
+                      <Cart />
+                    )}
+                  </>
+                )
+              }
+            />
+            <Route path="/contact" element={<Contact />} /> {/* Nueva ruta */}
+          </Routes>
+        </main>
 
-                {selectedCategory && currentSection !== "home" && (
-                  <CategoryGrid selectedCategory={selectedCategory} />
-                )}
-              </>
-            )}
-
-            {selectedCategory === "cart" && <Cart />}
-          </>
-        )}
-      </main>
-
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
