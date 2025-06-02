@@ -19,7 +19,7 @@ function Footer({ onSelectCategory }) {
             <span className="footer-separator">|</span>
           </li>
           <li>
-            <button onClick={() => alert("About section coming soon!")}>About</button>
+            <button onClick={() => handleClick("about")}>About</button>
           </li>
           <li>
             <span className="footer-separator">|</span>

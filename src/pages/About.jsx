@@ -10,11 +10,11 @@ function About() {
       <p className="about-description">
         Some of the key features include:
         <ul className="about-list">
-          <li>⚡ Fast product loading using API fetch and caching with localStorage</li>
-          <li>🧠 Smart category and search filtering</li>
-          <li>🛒 Shopping cart with quantity updates and persistent state</li>
-          <li>📱 Fully responsive layout using Tailwind CSS</li>
-          <li>✨ Smooth animations for modals and transitions using Framer Motion</li>
+          <li>Fast product loading using API fetch and caching with localStorage</li>
+          <li>Smart category and search filtering</li>
+          <li>Shopping cart with quantity updates and persistent state</li>
+          <li>Fully responsive layout using Tailwind CSS</li>
+          <li>Smooth animations for modals and transitions using Framer Motion</li>
         </ul>
       </p>
       <p className="about-description">

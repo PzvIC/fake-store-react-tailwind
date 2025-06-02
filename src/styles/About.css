@@ -1,0 +1,31 @@
+.about-section {
+  @apply py-32 flex flex-col items-center justify-center px-4 text-center text-amber-300 animate-fade-in mt-[-900px];
+}
+
+.about-title {
+  @apply text-3xl md:text-4xl font-bold mb-4;
+}
+
+.about-description {
+  @apply text-base md:text-lg mb-6 max-w-xl;
+}
+
+.about-list {
+  @apply list-disc pl-6 mt-2 space-y-2 text-left;
+}
+
+/* Reutilizamos la animación fade-in de contact */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out both;
+}

@@ -59,7 +59,7 @@ function Header({
       <div className="header-search">
         <input
           type="text"
-          placeholder="What are you looking for?"
+          placeholder={isMobile ? "" : "What are you looking for?"}
           className="search-input"
           value={searchTerm}
           onChange={(e) => {
