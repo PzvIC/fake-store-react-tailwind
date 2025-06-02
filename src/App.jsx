@@ -9,8 +9,8 @@ import { CategoryGrid } from "./components/CategoryGrid";
 import { Footer } from "./components/Footer";
 import { Cart } from "./components/Cart";
 import { SearchGrid } from "./components/SearchGrid";
-import { Contact } from "./pages/contact.jsx";
-import { About } from "./pages/about.jsx";
+import { Contact } from "../src/pages/contact.jsx";
+import { About } from "../src/pages/about.jsx";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
