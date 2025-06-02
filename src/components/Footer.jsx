@@ -3,6 +3,9 @@ import "../styles/Footer.css";
 function Footer({ onSelectCategory }) {
   const handleClick = (category) => {
     onSelectCategory(category);
+    if (category === null) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (

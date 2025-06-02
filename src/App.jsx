@@ -9,7 +9,8 @@ import { CategoryGrid } from "./components/CategoryGrid";
 import { Footer } from "./components/Footer";
 import { Cart } from "./components/Cart";
 import { SearchGrid } from "./components/SearchGrid";
-import { Contact } from "./pages/contact.jsx"; // <-- Importa la nueva página Contact
+import { Contact } from "./pages/Contact.jsx";
+import { About } from "./pages/About.jsx";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -55,6 +56,8 @@ function App() {
                       <Cart />
                     ) : selectedCategory === "contact" ? (
                       <Contact />
+                    ) : selectedCategory === "about" ? (
+                      <About />
                     ) : (
                       <>
                         {!selectedCategory && <MasonryGrid />}
