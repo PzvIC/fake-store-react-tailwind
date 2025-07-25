@@ -42,19 +42,10 @@ function Header({
 
   return (
     <header className="header-container">
-      <h1 className="header-title cursor-pointer" onClick={onGoHome}>
-        {isMobile ? (
-          <>
-            F<span className="underscore">_</span>S
-            <span className="underscore">_</span>
-          </>
-        ) : (
-          <>
-            Fake<span className="underscore">_</span>
-            Store<span className="underscore">_</span>
-          </>
-        )}
-      </h1>
+      <div className="header-title cursor-pointer" onClick={onGoHome}>
+        <h1>Fake<span className="underscore">_</span></h1>
+        <h1>Store<span className="underscore">_</span></h1>
+      </div>
 
       <div className="header-search">
         <input

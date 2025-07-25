@@ -3,7 +3,11 @@
 }
 
 .header-title {
-  @apply text-gray-100 text-4xl 3xl:text-6xl font-bold pt-2 md:pl-10 pl-3;
+  @apply relative -top-2 md:-top-2 text-gray-100 font-bold mb-2 md:pt-2 md:pl-4 md:mr-2 md:flex md:flex-row pl-3;
+}
+
+.header-title h1 {
+  @apply text-2xl md:text-4xl 3xl:text-6xl;
 }
 
 .header-title:hover {
@@ -16,7 +20,7 @@
 }
 
 .header-search {
-  @apply flex-1 mx-4 max-w-[80%];
+  @apply relative -top-1 flex-1 mx-5 max-w-[80%];
 }
 
 .search-input {
@@ -25,7 +29,7 @@
 }
 
 .cart-button {
-  @apply relative md:px-5 md:right-4;
+  @apply relative md:px-5 pb-4 md:pb-0 md:right-1 -top-1;
 }
 
 .cart-icon {
